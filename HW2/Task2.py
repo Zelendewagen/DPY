@@ -3,33 +3,31 @@
 # Для проверки своего кода используйте модуль fractions.
 import fractions
 
-a = '1/2'
-b = '5/8'
+a = '324234/2345'
+b = '324/2342'
+
+
+def nod(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 
 
 def roundup(fraction):
     if fraction[0] % fraction[1] == 0:
         return fraction[0] // fraction[1]
-    if fraction[1] % fraction[0] == 0:
-        fraction[1] //= fraction[0]
-        fraction[0] = 1
-    while fraction[0] % 5 == 0 and fraction[1] % 5 == 0:
-        fraction[0] //= 5
-        fraction[1] //= 5
-    while fraction[0] % 3 == 0 and fraction[1] % 3 == 0:
-        fraction[0] //= 3
-        fraction[1] //= 3
-    while fraction[0] % 2 == 0 and fraction[1] % 2 == 0:
-        fraction[0] //= 2
-        fraction[1] //= 2
-    return fraction
+    else:
+        fraction[0] //= nod(fraction[0], fraction[1])
+        fraction[1] //= nod(fraction[0], fraction[1])
+        return fraction
 
 
 def task2(a, b):
     first = list(map(int, a.split('/')))
     second = list(map(int, b.split('/')))
 
-    mult = roundup([first[0] * second[0], first[1] * second[1]])
+    mult = [first[0] * second[0], first[1] * second[1]]
+    roundup(mult)
     if isinstance(mult, list):
         mult = f'{mult[0]}/{mult[1]}'
     checkmult = fractions.Fraction(first[0], first[1]) * fractions.Fraction(second[0], second[1])

@@ -3,7 +3,7 @@
 # Проверяйте различные случайные варианты и выведите 4 успешных расстановки.
 # *Выведите все успешные варианты расстановок
 import random
-from Chess import Checker
+from Chess import Checker,Visual
 
 
 def pacifists_queens_generator():
@@ -21,6 +21,7 @@ def pacifists_queens_generator():
                 beaten_fields = list(set(beaten_fields))
                 check = False
                 print(coordinates)
+                Visual.visual(coordinates.values())
 
 
 pacifists_queens_generator()
